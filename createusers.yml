@@ -1,0 +1,16 @@
+---
+
+# Adding Users to Servers
+
+- hosts: managedservers
+  become: yes
+ 
+  vars:
+          users:
+                  - { username: 'testuser', ugroup: 'sudo', key: true, password: '$6$LYNIJwgvjpI$six2lPWB4oX/RKllD/lIcMxaT8zULQNUa7Avh2BG3OT4ILqhYaxARCGtsFB5RkX1nV7ycb05C3IqhZImlUOo90' }
+                  - { username: 'testusernokey', ugroup: 'sudo', key: false, password: '$6$LYNIJwgvjpI$six2lPWB4oX/RKllD/lIcMxaT8zULQNUa7Avh2BG3OT4ILqhYaxARCGtsFB5RkX1nV7ycb05C3IqhZImlUOo90' }
+  roles:
+          - adduser
+
+
+

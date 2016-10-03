@@ -1,0 +1,21 @@
+---
+
+
+- name: Add User To Server
+  user: name={{item.username}} password={{item.password}} shell="/bin/bash" 
+  with_items: '{{ users }}'
+
+- name: Add User to Groups
+  user: name={{item.username}} groups={{item.ugroups}}
+  when: item.ugroups is defined
+  with_items: '{{ users }}'
+
+- name: Add user to Single Group
+  user: name={{item.username}} group={{item.ugroup}}
+  when: item.ugroup is defined
+  with_items: '{{ users }}'
+
+- name: Add ssh key if present
+  authorized_key: user={{item.username}} key="{{ lookup('file', 'files/{{item.username}}-id_rsa.pub') }}"
+  when: item.key
+  with_items: '{{ users }}'

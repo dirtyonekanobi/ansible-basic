@@ -1,0 +1,2 @@
+[managedservers]
+10.7.8.999 ansible_ssh_user=testsshuser
